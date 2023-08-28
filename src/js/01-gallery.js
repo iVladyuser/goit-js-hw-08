@@ -24,38 +24,7 @@ const markup = galleryItems.map(
 );
 
 container.insertAdjacentHTML('beforeend', markup.join(''));
-container.addEventListener('click', openFullSize);
 
-function openFullSize(evt) {
-  if (!evt.target.classList.contains('gallery__image')) {
-    return;
-  }
-  evt.preventDefault();
 
-  const originalImgLink = evt.target.dataset.source;
-  const instance = basicLightbox.create(
-    `<img src="${originalImgLink}"
-`,
-    {
-      onShow: () => {
-        document.addEventListener('keydown', onListenerEscape);
-      },
-      onClose: () => {
-        document.removeEventListener('keydown', onListenerEscape);
-      },
-    }
-  );
-
-  instance.onShow();
-
-  document.addEventListener('keydown', evt => {
-    if (evt.key === 'Escape') {
-      // const visible = basicLightbox.visible();
-      // if (visible) {
-      instance.onClose();
-      // }
-    }
-  });
-}
 
 const galleryList = new SimpleLightbox('.gallery a');
